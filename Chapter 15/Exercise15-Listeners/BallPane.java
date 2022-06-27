@@ -1,5 +1,3 @@
-package exercise15;
-
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color; 
 import javafx.scene.shape.Circle; 
@@ -16,28 +14,31 @@ public class BallPane extends Pane{
 	double radius = 20; 
 	double x = radius, y = radius;
 	Circle ball = new Circle(x, y, radius); 
-	Button left = new Button("Left");
-	Button right = new Button("Right"); 
-	Button up = new Button("Up");
-	Button down = new Button("Down");
 	
 	//put ball in pane 
 	BallPane(){
 		ball.setFill(Color.RED);
 		ball.setCenterX(150);
-		ball.setCenterY(175);
+		ball.setCenterY(150);
 		getChildren().add(ball);
-		getChildren().add(getHBox()); 
+		 
 		
 	}
-	
-	//create HBox for buttons 
-	private HBox getHBox() {
-		HBox hbox = new HBox(25);
-		hbox.setPadding(new Insets(25, 25, 25, 25)); 
-		hbox.setAlignment(Pos.BOTTOM_CENTER);
-		hbox.getChildren().addAll(left, right, up, down);
-		return hbox;
+
+	public void Left() {
+		if (ball.getCenterX() - ball.getRadius() - 10 < 0) return; 
+		ball.setCenterX(ball.getCenterX() - 10);  
 	}
-	
+	public void Right() {
+		if (ball.getCenterX() + ball.getRadius() + 10 > getWidth()) return; 
+		ball.setCenterX(ball.getCenterX() + 10);
+	}
+	public void Down() {
+		if (ball.getCenterY() + ball.getRadius() + 10 > getHeight()) return;
+		ball.setCenterY(ball.getCenterY() + 10);
+	}
+	public void UP() {
+		if (ball.getCenterY() - ball.getRadius() - 10 < 0) return; 
+		ball.setCenterY(ball.getCenterY() - 10);
+	}
 }
