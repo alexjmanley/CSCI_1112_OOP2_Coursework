@@ -67,8 +67,14 @@ public class Exercise16_1 extends Application {
 		rbGreen.setOnAction(e -> lbl.setFill(Color.GREEN));
 		
 		//setonAction for move buttons add the methods  
-		moveLeft.setOnAction(e -> lbl.setTranslateX(lbl.getX() - 10));
-		moveRight.setOnAction(e -> lbl.setTranslateX(lbl.getX() + 10));
+		moveLeft.setOnAction(e -> { 
+			if (lbl.getX() - 10 < 0) return;
+		lbl.setTranslateX(lbl.getX() - 10);
+		});
+		moveRight.setOnAction(e -> {
+			if (lbl.getX() + 10 > 500) return;
+		lbl.setTranslateX(lbl.getX() + 10);
+		});
 		
 		Scene scene = new Scene(pane, 500, 300);
 		arg0.setTitle("RadioButtons");
