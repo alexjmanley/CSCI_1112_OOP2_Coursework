@@ -12,6 +12,9 @@ import javafx.scene.control.Label;
 import javafx.animation.Timeline;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame; 
+import javafx.scene.media.Media; 
+import javafx.scene.media.MediaPlayer; 
+import javafx.scene.media.MediaView; 
 
 public class Exercise16_21 extends Application {
 
@@ -21,7 +24,7 @@ public class Exercise16_21 extends Application {
 		seconds.setFont(Font.font("Times", 20));
 		seconds.setAlignment(Pos.CENTER);
 		
-		// create Timeline 
+		// create Time line 
 		Timeline countdown = new Timeline(
 				new KeyFrame( Duration.millis(1000), e -> {
 					seconds.setText((Integer.parseInt(seconds.getText()) - 1) + "");
@@ -33,6 +36,14 @@ public class Exercise16_21 extends Application {
 			countdown.setCycleCount(Integer.parseInt(seconds.getText()));
 			countdown.play();
 		});
+		
+		// add media 
+		final String MEDIA_URL = 
+				"https://liveexample.pearsoncmg.com/common/audio/anthem/anthem0.mp3";
+		Media media = new Media(MEDIA_URL);
+		MediaPlayer mediaPlayer = new MediaPlayer(media);
+		MediaView mediaview = new MediaView(mediaPlayer);
+		countdown.setOnFinished(e -> mediaPlayer.play());
 		
 		// Pane for the project 
 		BorderPane pane = new BorderPane(); 
@@ -51,3 +62,4 @@ public class Exercise16_21 extends Application {
 	}
 
 }
+
