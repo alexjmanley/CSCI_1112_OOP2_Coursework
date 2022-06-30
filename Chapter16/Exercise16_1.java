@@ -68,12 +68,12 @@ public class Exercise16_1 extends Application {
 		
 		//setonAction for move buttons add the methods  
 		moveLeft.setOnAction(e -> { 
-			if (lbl.getX() - 10 < 0) return;
-		lbl.setTranslateX(lbl.getX() - 10);
+			if (lbl.getTranslateX() - 10 < 0) return;
+		lbl.setTranslateX(lbl.getTranslateX() - 10);
 		});
 		moveRight.setOnAction(e -> {
-			if (lbl.getX() + 10 > 500) return;
-		lbl.setTranslateX(lbl.getX() + 10);
+			if (lbl.getTranslateX() + 10 > 500) return;
+		lbl.setTranslateX(lbl.getTranslateX() + 10);
 		});
 		
 		Scene scene = new Scene(pane, 500, 300);
