@@ -1,16 +1,17 @@
 package programming17;
 
-import java.io.*;
+import java.io.*; 
 import java.util.Scanner; 
 
 public class Exercise17_14_15 {
+	
+	public static void main(String[] args) throws IOException {
 		
-	public static void main(String[] args) throws Exception, IOException {
-		Scanner input = new Scanner(System.in); 
+		Scanner input = new Scanner(System.in);
 		
-		System.out.println("Enter 1 or 2");
-		System.out.println("1.) Encrpyt");
-		System.out.println("2.) Decrypt");
+		System.out.println("Enter 1 or 2:");
+		System.out.println("1.) Encrypt File");
+		System.out.println("2.) Decrypt File");
 		
 		switch(input.nextInt()) {
 		case 1: Encrypt();
@@ -18,74 +19,82 @@ public class Exercise17_14_15 {
 		case 2: Decrypt(); 
 			break; 
 		}
-		
 	}
-	
-	// create encrypt method 
+
+	// make Encrypt method
 	public static void Encrypt() throws IOException {
+		
 		Scanner input = new Scanner(System.in);
 		
-		// prompt user and make sure input file exists
-		System.out.println("Enter input file: ");
-		File inputFile = new File(input.next());
-		if(!inputFile.exists()) {
-			System.out.println("Source file " + inputFile + " does not exist");
-			System.exit(1);
+		System.out.println("Enter input File: ");
+		File sourceFile = new File(input.next());
+		if (!sourceFile.exists()) {
+			System.out.println("Source file " + sourceFile + " does not exist");
+			System.exit(2);
 		}
 		
-		System.out.println("Enter output file: ");
-		File outputFile = new File(input.next());
+		System.out.println("Enter output File: ");
+		File targetFile = new File(input.next());
 		
-		// try having the input read to the output and add 5 to the end 
-		try {
+		try (
 			BufferedInputStream input1 = 
-					new BufferedInputStream(new FileInputStream(inputFile));
+					new BufferedInputStream(new FileInputStream(sourceFile));
+			
 			BufferedOutputStream output = 
-					new BufferedOutputStream( new FileOutputStream(outputFile));
+					new BufferedOutputStream(new FileOutputStream(targetFile));
+			
+		) {
 			
 			int r = 0; 
-			while ((r = input1.read()) != -1)
-				output.write(r + 5);
+			while ((r = input1.read()) != -1) {
+				output.write(((byte)r) + 5);
+			}
 			
-			System.out.println("file encrypted");
+			System.out.println("File Encrypted");
 			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 	}
 	
-	// create Decrypt method 
+	// make decrypt method 
 	public static void Decrypt() throws IOException {
-		Scanner input = new Scanner(System.in);
 		
-		// Prompt user and make sure input value exists
-		System.out.println("Enter input file: ");
-		File inputFile = new File(input.next());
-		if(!inputFile.exists()) {
-			System.out.println("Source file " + inputFile + " does not exist");
-			System.exit(1);
+	Scanner input = new Scanner(System.in);
+		
+		System.out.println("Enter input File: ");
+		File sourceFile = new File(input.next());
+		if (!sourceFile.exists()) {
+			System.out.println("Source file " + sourceFile + " does not exist");
+			System.exit(2);
 		}
 		
-		System.out.println("Enter output file: ");
-		File outputFile = new File(input.next());
+		System.out.println("Enter output File: ");
+		File targetFile = new File(input.next());
 		
-		// read input file and 
-		try {
+		try (
 			BufferedInputStream input1 = 
-					new BufferedInputStream(new FileInputStream(inputFile));
+					new BufferedInputStream(new FileInputStream(sourceFile));
+			
 			BufferedOutputStream output = 
-					new BufferedOutputStream( new FileOutputStream(outputFile));
+					new BufferedOutputStream(new FileOutputStream(targetFile));
+			
+		) {
 			
 			int r = 0; 
-			while ((r = input1.read()) != -1)
-				output.write(r - 5);
+			while ((r = input1.read()) != -1) {
+				output.write(((byte)r) - 5);
+			}
 			
-			System.out.println("file decrypted");
+			System.out.println("File Decrypted");
 			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 	}
+	
 }
