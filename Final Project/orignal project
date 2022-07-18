@@ -1,0 +1,136 @@
+import java.util.Scanner; 
+
+public class Untitled {
+
+	public static void main(String[] args) {
+			Scanner input = new Scanner(System.in);
+		
+		
+				System.out.println("Hi I am here to help you get in better shape please"
+				+ "follow the instructions below and answer any questions");
+				System.out.println("Enter your weight in kg:");
+			double weight = input.nextDouble();
+				System.out.println("Enter your goal weight in kg:");
+			double goalweight = input.nextDouble();
+				System.out.println("Enter your gender, ex. Male, Female");
+			String gender = input.next();
+				System.out.println("Enter your height in centimeters:");
+			double height = input.nextDouble();
+				System.out.println("Enter your age in years:");
+			int age = input.nextInt(); 
+			double calories = calculatecalories(weight, gender, height, age);
+			int weekstogoal = 0;
+				if (weight > goalweight) {
+					calories = calories - 500;
+					while (weight > goalweight) {
+						weight = weight - 0.5; 
+						weekstogoal++; 
+					}
+				} else if (weight < goalweight) {
+						calories = calories + 500; 
+					while (weight < goalweight) {
+						weight = weight + 0.5; 
+						weekstogoal++;
+					}
+				}
+		
+			System.out.printf("Your calorie suggestion is %4.0f", calories);
+			System.out.print(" calories daily for " + weekstogoal);
+			System.out.printf(" weeks. Your protien suggestion is %3.0f", (calories * 0.25) / 4);
+			System.out.print(" grams daily");
+			System.out.println();
+			System.out.println(); 
+			
+			buildworkout(weekstogoal);
+	}
+		/* create method that returns calories, These calories assume
+		 user is doing moderate exercise, which they will if they follow advice */
+	/* add in a goal weight suggestion that tells how many weeks it will take to get to that 
+	weight eating those calories. then tell maintenance calories at goal weight */
+	public static double calculatecalories(double weight, String gender, double height, int age) {
+		double calories = 0; 
+		if (gender.equalsIgnoreCase("Female"))
+			calories = (447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age)) * 1.55;
+		else 
+			calories = (88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age)) * 1.55;
+		return calories;
+	}
+	//create method to build workout 
+	public static void buildworkout (int weekstogoal) {
+				Scanner input = new Scanner(System.in);
+		int workoutdays = 0;
+		while (workoutdays == 0 || workoutdays == 1 || workoutdays == 2 || workoutdays == 7) {
+				System.out.println("How many days a week would you like to workout? ex ( 3 )");
+			workoutdays = input.nextInt();
+			switch (workoutdays) {
+			case 0: System.out.println("Really? zero days. try again");
+				break; 
+			case 1: System.out.println("come on one day? try again");
+				break; 
+			case 2: System.out.println("You can do one more day! try again");
+				break; 
+			case 7: System.out.println("Seven days a week? what are you? superman? try again");
+				break; 
+			}
+		}
+				System.out.println("please enter your squat, bench and deadlift max seperated by a space"
+					+ " for example ( 375 275 450 ):");
+			int[] max = new int[3];
+			for (int i = 0; i < 3; i++)
+				max[i] = input.nextInt(); 
+				System.out.println();
+				System.out.println();
+			
+			System.out.println("Strength training suggestion");
+			System.out.println();
+			if (workoutdays == 3) {
+				System.out.println("Day 1:");
+				System.out.println("Bench press 5X5 at " + max[1] * .75 + " lbs");
+				System.out.println("Rest day");
+				System.out.println("Day 2:");
+				System.out.println("Squat 5x5 at " + max[0] * .75 + " lbs");
+				System.out.println("Rest day");
+				System.out.println("Day 3:");
+				System.out.println("Deadlift 5x5 at " + max[2] * .75 + "lbs");
+				}
+			if (workoutdays == 4) {
+				System.out.println("Day 1:");
+				System.out.println("Bench press 5X5 at " + max[1] * .75 + " lbs");
+				System.out.println("Day 2:");
+				System.out.println("Deadlift 5x5 at " + max[2] * .75 + "lbs");
+				System.out.println("Rest day");
+				System.out.println("Day 3:");
+				System.out.println("Bench press 5X5 at " + max[1] * .75 + " lbs");
+				System.out.println("Rest day");
+				System.out.println("Day 4:");
+				System.out.println("Squat 5x5 at " + max[0] * .75 + " lbs");
+				}	
+			if (workoutdays == 5) {
+				System.out.println("Day 1:");
+				System.out.println("Bench press 5X5 at " + max[1] * .75 + " lbs");
+				System.out.println("Day 2:");
+				System.out.println("Squat 5x5 at " + max[0] * .75 + " lbs");
+				System.out.println("Day 3:");
+				System.out.println("Deadlift 5x5 at " + max[2] * .75 + "lbs");
+				System.out.println("Rest day");
+				System.out.println("Day 4:");
+				System.out.println("Bench press 5X5 at " + max[1] * .75 + " lbs");
+				System.out.println("Day 5:");
+				System.out.println("Squat 5x5 at " + max[0] * .75 + " lbs");
+				}
+			if (workoutdays == 6) {
+				System.out.println("Day 1:");
+				System.out.println("Bench press 5X5 at " + max[1] * .75 + " lbs");
+				System.out.println("Day 2:");
+				System.out.println("Squat 5x5 at " + max[0] * .75 + " lbs");
+				System.out.println("Day 3:");
+				System.out.println("Deadlift 5x5 at " + max[2] * .75 + "lbs");
+				System.out.println("Day 4:");
+				System.out.println("Bench press 5X5 at " + max[1] * .75 + " lbs");
+				System.out.println("Day 5:");
+				System.out.println("Squat 5x5 at " + max[0] * .75 + " lbs");
+				System.out.println("Day 6:");
+				System.out.println("Deadlift 5x5 at " + max[2] * .75 + "lbs");
+				}
+			}
+	}
