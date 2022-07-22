@@ -1,11 +1,11 @@
 package finalproject;
 
 import javafx.application.Application;
-import javafx.scene.Parent;
 import javafx.scene.Scene; 
 import javafx.scene.control.*; 
 import javafx.stage.Stage; 
 import javafx.scene.layout.*;
+import java.text.DecimalFormat; 
 
 public class Final_Project extends Application{
 	//List of text fields
@@ -84,11 +84,13 @@ public class Final_Project extends Application{
 						}
 					}
 		//Add Pane
+				DecimalFormat df = new DecimalFormat(".");
 				Pane pane = new Pane(); 
-				Label label = new Label("Your calorie suggestion is \n" + calories + " calories daily.\n"
+				Label label = new Label("Your calorie suggestion is \n" + df.format(calories) + " calories daily.\n"
 						+ "You will be at your goal weight after " + weeksToGoal + " weeks \n"
-						+ "Your protien suggestion is \n" + (calories * 0.25) / 4 + " grams daily");
-				
+						+ "Your protien suggestion is \n" + df.format((calories * 0.25) / 4) + " grams daily");
+				label.setLayoutY(60);
+				label.setLayoutX(50);
 				pane.getChildren().add(label);
 				return pane; 
 	}
